@@ -22,15 +22,18 @@ class ComputerPlayer < Player
   def code_white(player)
     @white_feedback = @color_code.reduce([]) { |color_code, color| color_code << color }
     player.color_code.each_with_index do |color, index|
-      if @white_feedback[index] == (color)
-        @color_feedback << 'WHITE'
-        @white_feedback[index] = nil
-      end
+      next unless @white_feedback[index] == (color)
+
+      @color_feedback << 'WHITE'
+      @white_feedback[index] = nil
+      player.color_code[index] = nil
     end
   end
 
   def code_red(player)
+    print @white_feedback
     player.color_code.each do |color|
+      next if color.nil?
       next unless @white_feedback.include?(color)
 
       index = @white_feedback.find_index(color)
