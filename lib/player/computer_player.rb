@@ -42,9 +42,14 @@ class ComputerPlayer < Player
     end
   end
 
+  def reset
+    @color_feedback = []
+  end
+
   def create_feedback(player)
     code_white(player)
     code_red(player)
     puts @color_feedback
+    reset
   end
 end
