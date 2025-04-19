@@ -1,5 +1,3 @@
-# that inherits from class Player
-
 require_relative '../player'
 # Human player
 class HumanPlayer < Player
