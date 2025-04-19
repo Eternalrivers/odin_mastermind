@@ -1,4 +1,3 @@
-# Inherits from class Player
 require_relative '../player'
 # Computer player that inherits from class Player
 class ComputerPlayer < Player
@@ -19,20 +18,29 @@ class ComputerPlayer < Player
     end
   end
 
+  def white_feedback
+    @color_code.reduce([]) { |color_code, color| color_code << color }
+  end
+
+  def red_feedback(player)
+    player.color_code.reduce([]) { |color_code, color| color_code << color }
+  end
+
   def code_white(player)
-    @white_feedback = @color_code.reduce([]) { |color_code, color| color_code << color }
-    player.color_code.each_with_index do |color, index|
+    @white_feedback = white_feedback
+    @red_feedback = red_feedback(player)
+    @red_feedback.each_with_index do |color, index|
       next unless @white_feedback[index] == (color)
 
       @color_feedback << 'WHITE'
       @white_feedback[index] = nil
-      player.color_code[index] = nil
+      @red_feedback[index] = nil
     end
   end
 
-  def code_red(player)
+  def code_red
     print @white_feedback
-    player.color_code.each do |color|
+    @red_feedback.each do |color|
       next if color.nil?
       next unless @white_feedback.include?(color)
 
@@ -48,7 +56,7 @@ class ComputerPlayer < Player
 
   def create_feedback(player)
     code_white(player)
-    code_red(player)
+    code_red
     puts @color_feedback
     reset
   end
