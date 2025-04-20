@@ -39,7 +39,6 @@ class ComputerPlayer < Player
   end
 
   def code_red
-    print @white_feedback
     @red_feedback.each do |color|
       next if color.nil?
       next unless @white_feedback.include?(color)
