@@ -7,7 +7,7 @@ class HumanPlayer < Player
     puts 'BLUE, ORANGE, GREEN, VIOLET'
     i = 0
     while i < 4
-      puts "Please guess the No.#{i + 1} color  "
+      puts "\nPlease guess the No.#{i + 1} color  "
       @color_code[i] = gets.upcase.chomp
       i += 1
     end
