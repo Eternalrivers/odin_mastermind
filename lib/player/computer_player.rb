@@ -12,10 +12,11 @@ class ComputerPlayer < Player
     COLOR[c]
   end
 
-  def create_code
+  def input_color_code
     (0..3).each do |color|
       @color_code[color] = random_color
     end
+    puts @color_code
   end
 
   def white_feedback
