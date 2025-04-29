@@ -4,24 +4,25 @@ require_relative '../lib/player/human_player'
 # class Game
 class Game
   def initialize(human_player, computer_player)
-    @human_player = human_player.new('Player 1')
-    @computer_player = computer_player.new('Computer player')
+    @code_breaker = human_player.new('Player 1')
+    @code_maker = computer_player.new('Computer player')
+    @color_feedback = []
   end
 
   def play
-    @computer_player.create_code
+    @code_maker.input_color_code
 
     i = 0
     loop do
-      puts @human_player.input_color_code
-      puts @computer_player.create_feedback(@human_player)
+      puts @code_breaker.input_color_code
+      puts create_feedback(@code_breaker)
       i += 1
-      break if i == 12 || @human_player.color_code == @computer_player.color_code
+      break if i == 12 || @code_breaker.color_code == @code_maker.color_code
     end
   end
 
   def white_feedback
-    @color_code.reduce([]) { |color_code, color| color_code << color }
+    @code_maker.color_code.reduce([]) { |color_code, color| color_code << color }
   end
 
   def red_feedback(player)
@@ -55,8 +56,8 @@ class Game
     @color_feedback = []
   end
 
-  def create_feedback(player)
-    code_white(player)
+  def create_feedback(code_breaker)
+    code_white(code_breaker)
     code_red
     puts @color_feedback
     reset
